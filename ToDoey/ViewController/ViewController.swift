@@ -82,9 +82,8 @@ extension ViewController: UITableViewDataSource {
 //    For delete on swipe
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let result = dataSourceDB.delete(id: Int64(indexPath.row + 1))
+            let result = dataSourceDB.delete(id: tasks[indexPath.row].id!)
             if result > 0 {
-                print("Task --- \(tasks) --- \(indexPath.row)")
                 tasks.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.reloadData()
