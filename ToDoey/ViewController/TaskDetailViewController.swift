@@ -15,9 +15,7 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var editButton: UIButton!
     
-    var dataSourceDB: TaskDataSource!
-    var data: Task!
-    var rowId: Int!
+    let viewModel = TaskDetailViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +26,16 @@ class TaskDetailViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         
-        taskName.text = data.name
-        taskDetail.text = data.details
-        date.text = formatter.string(from: data.date)
-        status.text = data.status
+        taskName.text = viewModel.data.name
+        taskDetail.text = viewModel.data.details
+        date.text = formatter.string(from: viewModel.data.date)
+        status.text = viewModel.data.status
     }
 
     @IBAction func onEditClick(_ sender: Any) {
         let vm = TaskEditViewController()
-        vm.dataSourceDB = dataSourceDB
-        vm.data = data
+        vm.viewModel.dataSourceDB = viewModel.dataSourceDB
+        vm.viewModel.data = viewModel.data
         self.navigationController?.pushViewController(vm, animated: true)
     }
     

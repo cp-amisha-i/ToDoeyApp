@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
-    let dataSourceDB = TaskDataSource()
+    let viewModel = MainViewModel()
     var tasks: [Task] = []
     var data: [Task] = []
     
@@ -20,12 +20,11 @@ class ViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        dataSourceDB.createDatabase()
-        dataSourceDB.createTable()
+        viewModel.createDatabase()
         
         prepairTableview()
         addButton.layer.cornerRadius = addButton.frame.size.height / 2
-        tasks = dataSourceDB.getAllData() ?? []
+        tasks = viewModel.getAllTasks()
     }
     
     func prepairTableview() {
@@ -35,18 +34,17 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tasks = dataSourceDB.getAllData() ?? []
+        tasks = viewModel.getAllTasks()
         tableView.reloadData()
     }
     
     @IBAction func onAddButtonClick(_ sender: UIButton) {
         let vm = TaskEditViewController()
-        vm.dataSourceDB = dataSourceDB
-        vm.tasks = tasks
-        vm.datas = data
+        vm.viewModel.dataSourceDB = viewModel.dataSourceDB
+        vm.viewModel.tasks = tasks
+        vm.viewModel.datas = data
         self.navigationController?.pushViewController(vm, animated: true)
     }
-    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -55,9 +53,11 @@ extension ViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell") as! TableViewCell
         if tasks.count != 0 {
             cell.titleLabel.text = tasks[indexPath.row].name
-            cell.dataSourceDB = dataSourceDB
-            cell.rowId = Int64(indexPath.row + 1)
-            
+            cell.viewModel.dataSourceDB = viewModel.dataSourceDB
+            cell.viewModel.rowId = tasks[indexPath.row].id
+            if tasks[indexPath.row].status == "Complete" {
+                cell.tickButton.tintColor = .cyan
+            }
         } else {
             cell.titleLabel.text = "No Task Added."
         }
@@ -73,20 +73,20 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vm = TaskDetailViewController()
-        vm.dataSourceDB = dataSourceDB
-        vm.rowId = indexPath.row
-        vm.data = dataSourceDB.getData(id: Int64(indexPath.row + 1))
+        vm.viewModel.dataSourceDB = viewModel.dataSourceDB
+        vm.viewModel.data = viewModel.getSelectedTask(id: tasks[indexPath.row].id!)
         self.navigationController?.pushViewController(vm, animated: true)
     }
     
 //    For delete on swipe
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let result = dataSourceDB.delete(id: tasks[indexPath.row].id!)
-            if result > 0 {
-                tasks.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                tableView.reloadData()
+            viewModel.deleteTask(id : tasks[indexPath.row].id!) { isSuccess in
+                if isSuccess {
+                    tasks.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    tableView.reloadData()
+                }
             }
         }
     }

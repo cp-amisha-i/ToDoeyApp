@@ -13,29 +13,23 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var tickButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
-    var dataSourceDB: TaskDataSource!
-    var rowId: Int64!
+    let viewModel = TableCellViewModel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        
     }
     
     @IBAction func onClickTickButton(_ sender: UIButton) {
         if tickButton.tintColor != .cyan {
-            let result = dataSourceDB.updateStatus(id: rowId, status: "Complete")
-            if result {
+            viewModel.updateTask(status: true) { isUpdate in
                 tickButton.tintColor = .cyan
             }
         } else {
-            let result = dataSourceDB.updateStatus(id: rowId, status: "InComplete")
-            if result {
+            viewModel.updateTask(status: false) { isUpdate in
                 tickButton.tintColor = .lightGray
             }
         }
