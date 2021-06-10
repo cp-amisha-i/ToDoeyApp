@@ -72,7 +72,7 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="dbD-dW-sNH"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="Save"/>
                                     <connections>
