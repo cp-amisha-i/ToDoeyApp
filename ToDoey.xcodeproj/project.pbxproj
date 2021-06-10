@@ -93,6 +93,17 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		DA25ED87267234D0000D5090 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				DAD93414266B6A1600E71C1E /* MainViewModel.swift */,
+				DA5C959B2670E15A008A3CFD /* TableCellViewModel.swift */,
+				DA5C959F2670F0C8008A3CFD /* TaskEditViewModel.swift */,
+				DA5C959D2670EFBE008A3CFD /* TaskDetailViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		DAEE0E4426690C5200CF3A4A = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +130,7 @@
 				DA25ED8426722D75000D5090 /* Extension */,
 				DAEE0E6F2669143B00CF3A4A /* Model */,
 				DAEE0E662669123000CF3A4A /* ViewController */,
+				DA25ED87267234D0000D5090 /* View Model */,
 				DAEE0E5926690C5300CF3A4A /* Assets.xcassets */,
 				DAEE0E5B26690C5300CF3A4A /* LaunchScreen.storyboard */,
 				DAEE0E5E26690C5300CF3A4A /* Info.plist */,
@@ -131,16 +143,12 @@
 			children = (
 				DAEE0E5426690C5200CF3A4A /* ViewController.swift */,
 				DAEE0E5626690C5200CF3A4A /* Main.storyboard */,
-				DAD93414266B6A1600E71C1E /* MainViewModel.swift */,
 				DAEE0E672669127800CF3A4A /* TableViewCell.swift */,
 				DAEE0E682669127800CF3A4A /* TableViewCell.xib */,
-				DA5C959B2670E15A008A3CFD /* TableCellViewModel.swift */,
 				DAEE0E70266914C000CF3A4A /* TaskEditViewController.swift */,
 				DAEE0E71266914C000CF3A4A /* TaskEditViewController.xib */,
-				DA5C959F2670F0C8008A3CFD /* TaskEditViewModel.swift */,
 				DAEE0E742669166700CF3A4A /* TaskDetailViewController.swift */,
 				DAEE0E752669166700CF3A4A /* TaskDetailViewController.xib */,
-				DA5C959D2670EFBE008A3CFD /* TaskDetailViewModel.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
