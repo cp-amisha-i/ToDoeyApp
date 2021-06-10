@@ -18,7 +18,7 @@ class TaskEditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        saveButton.setCircular()
         if viewModel.data != nil {
             nameTextField.text = viewModel.data.name
             descriptionTextField.text = viewModel.data.details

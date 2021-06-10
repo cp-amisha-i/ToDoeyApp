@@ -20,6 +20,9 @@ class TaskDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showData()
+        editButton.setCircular()
+        editButton.setShadow()
+        taskName.setCircular()
     }
     
     func showData() {
