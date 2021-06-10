@@ -56,7 +56,7 @@ extension ViewController: UITableViewDataSource {
             cell.viewModel.dataSourceDB = viewModel.dataSourceDB
             cell.viewModel.rowId = tasks[indexPath.row].id
             if tasks[indexPath.row].status == "Complete" {
-                cell.tickButton.tintColor = .cyan
+                cell.tickButton.tintColor = .green
             }
         } else {
             cell.titleLabel.text = "No Task Added."

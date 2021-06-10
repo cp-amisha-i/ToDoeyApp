@@ -24,9 +24,9 @@ class TableViewCell: UITableViewCell {
     }
     
     @IBAction func onClickTickButton(_ sender: UIButton) {
-        if tickButton.tintColor != .cyan {
+        if tickButton.tintColor != .green {
             viewModel.updateTask(status: true) { isUpdate in
-                tickButton.tintColor = .cyan
+                tickButton.tintColor = .green
             }
         } else {
             viewModel.updateTask(status: false) { isUpdate in
